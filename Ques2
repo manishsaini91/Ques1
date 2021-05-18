@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string s;
+    cin>>s;
+    int d;
+    cin>>d;
+    int n = s.size();
+    vector <int> count(26,0);
+    int i;
+    for(i=0;i<n;i++)
+    count[s[i]-'a']++;
+    sort(count.begin(),count.end());
+    reverse(count.begin(),count.end());
+    if(d>26||count[d-1]==0)
+    {
+        cout<<"-1\n";
+    }
+    else
+    {
+        int ans = 0;
+        if(d==1)
+        {
+            cout<<count[0]<<"\n";
+        }
+        else
+        {
+            if(count[d-2]==1)
+            {
+                cout<<"-1\n";
+            }            
+            else
+            {
+                int odd = 0;
+                for(int i=0;i<d;i++)
+                {
+                    if(count[i]%2==1){
+                        odd=1;
+                    }    
+                    int val = count[i]/2;
+                    ans+=val*2;  
+                }
+                if(odd)
+                ans++;
+                cout<<ans<<"\n";
+            }
+        }
+    }
+}
